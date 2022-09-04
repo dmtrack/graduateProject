@@ -1,0 +1,40 @@
+
+.container {
+    max-width: 800px;
+
+}
+
+.container-page {
+    max-width: 800px;
+    margin-top: 100px;
+
+
+}
+.content {
+    max-width: 800px;
+    margin-top: 50px;
+}
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: initial;
+}
+
+.episode-card {
+    border-radius: 10px;
+    border-style: hidden;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 2px;
+    hover:shadow-md;
+    hover:transition-all;
+    cursor: pointer;
+    font-size: 15px;
+
+
+}
+
+.main-logo {
+    border-radius: 11px;
+
+}
+
+

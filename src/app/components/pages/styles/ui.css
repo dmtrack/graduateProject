@@ -1,0 +1,22 @@
+.input-search {
+    border: initial;
+    width: 650px;
+    height: 42px;
+}
+
+.container-search {
+    margin-top: 50px;
+    margin-bottom: 4px;
+    position: relative;
+    width: 650px;
+}
+.search-dropdown {
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 42px;
+    height: 200px;
+    width: auto;
+}
+
+

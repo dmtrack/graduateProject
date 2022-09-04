@@ -1,0 +1,5 @@
+.card {
+    @apply border rounder-md px-6 mb-2 hover:shadow-md hover:transition-all cursor-pointer
+}
+
+
