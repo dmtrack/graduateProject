@@ -1,7 +1,6 @@
 import React from "react";
 import Comments from "../ui/comments";
-import {useSelector} from "react-redux";
-import {getIsLoggedIn} from "../store/slices/userSlice";
+
 
 const Episode = ({ id, episodes }) => {
   const getEdpisodeById = (id) => {

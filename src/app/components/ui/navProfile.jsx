@@ -5,7 +5,6 @@ import { getCurrentUserData } from "../store/slices/userSlice";
 
 function NavProfile() {
     const currentUser = useSelector(getCurrentUserData());
-    console.log(currentUser, 'currentUser')
     const [isOpen, setOpen] = useState(false);
     const toggleMenu = () => {
         setOpen((prevState) => !prevState);

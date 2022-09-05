@@ -3,7 +3,7 @@ import React from "react";
 const EpisodeCard = ({ episode }) => {
     const style = {
         width: 280,
-        padding: 5
+        padding: 5,
     }
 
   return (
