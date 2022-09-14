@@ -3,6 +3,8 @@ const { Schema, model } = require("mongoose");
 const schema = new Schema(
   {
     content: { type: "String", required: true },
+    // avatar: { type: "String", required: true },
+    // name: { type: "String", required: true },
     // На чьей странице находится комментарий
     pageId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     // Кто оставил комментарий
