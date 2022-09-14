@@ -1,11 +1,11 @@
 import React from "react";
+import {Divider} from "antd";
 
 const Mainpage = () => {
   return (
     <>
       <div className="container-page">
-          <h2 className="mb-4 text-dark text-muted">О проекте</h2>
-          <hr/>
+<Divider/>
 
           <span className="content">Some text...</span>
       </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import EpisodeCard from "../EpisodeCard";
 import PropTypes from "prop-types";
+import {Card, Col, List, Row} from "antd";
+import episode from "../pages/episode";
 
 const EpisodesList = ({ episodes, onOpenCard }) => {
   const handleClick = (id) => {
@@ -8,20 +10,11 @@ const EpisodesList = ({ episodes, onOpenCard }) => {
   };
   return (
     <>
-      <div className="card-body text-center">
-        <div className="row g-6">
-          {episodes.map((episode) => (
-            <div
-              className="col-6 d-flex flex-column align-items-center "
-              key={episode._id}
-            >
-              <div className="pt-3 pb-3" onClick={() => handleClick(episode._id)}>
-                <EpisodeCard key={episode._id} episode={episode} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <List grid ={{gutter: 16, column: 2}}
+            dataSource={episodes}
+            renderItem = {(item) => (
+                <List.Item><Card hoverable style={{background: "whitesmoke", cursor: "pointer"}} title={`${item.date} / ${item.name}`}  onClick={()=>handleClick(item._id)}>{item.brief}</Card></List.Item> )} >
+      </List>
     </>
   );
 };
