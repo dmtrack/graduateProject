@@ -2,7 +2,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Mainpage from "./app/components/pages/mainpage";
 import Login from "./app/components/pages/login";
 import Episodes from "./app/components/pages/episodes";
-import Team from "./app/components/pages/team";
 import notfound from "./app/components/ui/notfound";
 import AppLoader from "./app/components/ui/HOC/appLoader";
 import LogOut from "./app/components/pages/logout";
@@ -29,7 +28,11 @@ function App() {
         <Layout>
           <Siderpage mode={collapsed} />
           <Layout className="site-layout">
-            <Headerpage collapsed={collapsed} setCollapsed={setCollapsed} />
+            <Headerpage
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+              className="site-layout-background"
+            />
             <Content className="site-layout-background" style={contentStyle}>
               <Switch>
                 <Route exact path="/" component={Mainpage} />

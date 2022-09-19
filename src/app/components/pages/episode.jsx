@@ -25,9 +25,7 @@ const Episode = ({ id, episodes }) => {
           <span className="col-sm-12">{episode.timecodes}</span>
         </div>
       </div>
-      <div className="col-sm-12 pt-4">
-        <Comments episodeId={id} />
-      </div>
+
       <div>
         <CommentsNew episodeId={id} />
       </div>

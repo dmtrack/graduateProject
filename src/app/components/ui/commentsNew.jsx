@@ -2,8 +2,14 @@ import { Comment, List, Tooltip } from "antd";
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments, loadCommentsList } from "../store/slices/commentsSlice";
-import { getCurrentUserData, getIsLoggedIn } from "../store/slices/userSlice";
+import {
+  createComment,
+  getComments,
+  loadCommentsList,
+  removeComment,
+} from "../store/slices/commentsSlice";
+import { getIsLoggedIn, getUsersList } from "../store/slices/userSlice";
+import AddCommentFormNew from "../common/comments/addCommentFormNew";
 
 const CommentsNew = ({ episodeId }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -13,13 +19,21 @@ const CommentsNew = ({ episodeId }) => {
   }, [episodeId]);
   const comments = useSelector(getComments());
 
+  const handleSubmit = (data) => {
+    dispatch(createComment({ ...data, pageId: episodeId }));
+  };
+  const handleRemoveComment = (id) => {
+    dispatch(removeComment(id));
+  };
+  const users = useSelector(getUsersList());
+
   if (comments) {
     const newData = function () {
       const allComments = comments.map((c) => {
         return {
-          actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-          author: `${c._id}`,
-          avatar: "https://joeschmoe.io/api/v1/random",
+          author: users.find((u) => {
+            return u._id === c.userId;
+          }),
           content: <p>{c.content}</p>,
           datetime: (
             <Tooltip
@@ -28,7 +42,7 @@ const CommentsNew = ({ episodeId }) => {
                 .format("YYYY-MM-DD HH:mm:ss")}
             >
               <span>
-                {moment(`${c.created_at}`).subtract(1, "hours").fromNow()}
+                {moment(`${c.created_at}`).subtract(0, "hours").fromNow()}
               </span>
             </Tooltip>
           ),
@@ -39,23 +53,24 @@ const CommentsNew = ({ episodeId }) => {
 
     return (
       comments && (
-        <List
-          className="comment-list"
-          header={`$0 replies`}
-          itemLayout="horizontal"
-          dataSource={newData()}
-          renderItem={(item) => (
-            <li>
-              <Comment
-                actions={item.actions}
-                author={item.author}
-                avatar={item.avatar}
-                content={item.content}
-                datetime={item.datetime}
-              />
-            </li>
-          )}
-        />
+        <>
+          <AddCommentFormNew onSubmit={handleSubmit} />
+          <List
+            className="comment-list"
+            itemLayout="horizontal"
+            dataSource={newData()}
+            renderItem={(item) => (
+              <li>
+                <Comment
+                  author={item.author.name}
+                  avatar={item.author.image}
+                  content={item.content}
+                  datetime={item.datetime}
+                />
+              </li>
+            )}
+          />
+        </>
       )
     );
   }

@@ -21,7 +21,7 @@ const Siderpage = ({ mode }) => {
       collapsible
       collapsed={mode}
       style={{
-        overflow: "auto",
+        overflow: "revert-layer",
         height: "100vh",
         left: 0,
         top: 0,
@@ -63,7 +63,7 @@ const Siderpage = ({ mode }) => {
               {
                 key: "1",
                 icon: <ExperimentOutlined />,
-                label: <Link to="/main">О проекте</Link>,
+                label: <Link to="/">О проекте</Link>,
               },
               {
                 key: "2",
