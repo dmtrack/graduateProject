@@ -2,6 +2,8 @@ const TOKEN_KEY = "jwt-token";
 const REFRESH_KEY = "jwt-refresh-token";
 const EXPIRES_KEY = "jwt-expires";
 const USERID_KEY = "user-local-id";
+const BOOKMARKS = "bookmarks";
+const CURRENT_USER = "currentUser";
 
 export function setTokens({
   refreshToken,
@@ -35,6 +37,22 @@ export function getUserId() {
   return localStorage.getItem(USERID_KEY);
 }
 
+export function getUser() {
+  return JSON.parse(localStorage.getItem(CURRENT_USER));
+}
+
+export function fetchAllEpisodes() {
+  return JSON.parse(localStorage.getItem(BOOKMARKS)) || [];
+}
+
+export function setEpisodes(data) {
+  localStorage.setItem(BOOKMARKS, JSON.stringify(data));
+}
+
+export function removeBookmarks() {
+  localStorage.removeItem(BOOKMARKS);
+}
+
 const localStorageService = {
   setTokens,
   getAccessToken,
@@ -42,5 +60,8 @@ const localStorageService = {
   getTokenExpiresDate,
   getUserId,
   removeAuthData,
+  removeBookmarks,
+  setEpisodes,
+  fetchAllEpisodes,
 };
 export default localStorageService;
