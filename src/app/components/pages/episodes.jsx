@@ -57,7 +57,6 @@ const Episodes = () => {
       return filteredEpisodes;
     }
     const filteredEpisodes = filterEpisodes(episodes);
-    const episodesCount = filteredEpisodes.length;
     episodesCrop = paginate(filteredEpisodes, page, ITEMS_PER_PAGE);
     return (
       <>

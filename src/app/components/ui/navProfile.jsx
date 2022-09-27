@@ -23,14 +23,6 @@ function NavProfile() {
             </Link>
           ),
         },
-        // {
-        //   key: "2",
-        //   label: (
-        //     <Link to={`/users/${currentUser._id}`} className="dropdown-item">
-        //       Профиль
-        //     </Link>
-        //   ),
-        // },
       ]}
     />
   );

@@ -9,8 +9,8 @@ import { Layout } from "antd";
 import React, { useState } from "react";
 import Siderpage from "./app/components/ui/sider";
 import Headerpage from "./app/components/ui/header";
-import Bookmarks from "./app/components/pages/bookmarks";
 import { Footer } from "antd/es/layout/layout";
+import BookmarksPage from "./app/components/pages/bookmarksPage/bookmarksPage";
 
 const { Content } = Layout;
 
@@ -38,7 +38,7 @@ function App() {
                 <Route exact path="/" component={Mainpage} />
                 <Route path="/episodes/:episodeId?" component={Episodes} />
                 <Route path="/login" component={Login} />
-                <Route path="/bookmarks" component={Bookmarks} />
+                <Route path="/bookmarks" component={BookmarksPage} />
                 <Route path="/logout" component={LogOut} />
                 <Route path="/404" component={notfound} />
                 <Redirect to="/404" />
