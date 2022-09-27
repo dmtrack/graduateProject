@@ -8,6 +8,8 @@ import {
 } from "../../store/slices/episodeSlice";
 import { getIsLoggedIn } from "../../store/slices/userSlice";
 import EpisodesList from "../../ui/episodesList";
+import { Card, Divider, Image } from "antd";
+import Meta from "antd/es/card/Meta";
 
 const BookmarksPage = () => {
   const dispatch = useDispatch();
@@ -43,6 +45,8 @@ const BookmarksPage = () => {
     const newEpisodes = findEpisodes();
     return (
       <div className="d-flex justify-content-center flex-wrap mb-5">
+        <h2 style={{ marginBottom: "10px" }}>Избранное</h2>
+        <Divider />
         {newEpisodes.length > 0 ? (
           newEpisodes.map((episode) => (
             <div
@@ -59,11 +63,23 @@ const BookmarksPage = () => {
             </div>
           ))
         ) : (
-          <h1 className="my-5">no bookmarked episodes</h1>
+          <Card
+            hoverable
+            style={{
+              background: "whitesmoke",
+              cursor: "pointer",
+              width: 240,
+            }}
+            cover={<img alt="no image" src="/meetlogo.png" />}
+          >
+            <Meta title="no bookmarked episodes" />
+          </Card>
         )}
       </div>
     );
   }
 };
+
+// <Image src={currentUser.image} style={{ width: 40 }} />
 
 export default BookmarksPage;

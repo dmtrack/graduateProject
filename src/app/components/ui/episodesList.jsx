@@ -33,6 +33,7 @@ const EpisodesList = ({ episodes, onOpenCard }) => {
               style={{ background: "whitesmoke", cursor: "pointer" }}
               title={`${item.date} / ${item.name}`}
               onClick={() => handleClick(item._id)}
+              cover={<img alt="no image" src="/meetlogo.png" />}
             >
               {item.brief}
             </Card>

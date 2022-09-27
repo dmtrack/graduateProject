@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCurrentUserData } from "../store/slices/userSlice";
-import { Avatar, Button, Dropdown, Image, Menu } from "antd";
+import { Avatar, Dropdown, Image, Menu } from "antd";
 
 function NavProfile() {
   const currentUser = useSelector(getCurrentUserData());
@@ -30,8 +30,6 @@ function NavProfile() {
   return (
     <div className="dropdown " onClick={toggleMenu}>
       <div className="btn dropdown-toggle d-flex align-items-center">
-        {/*<div className="me-2"></div>*/}
-
         <Dropdown
           overlay={menu}
           placement="bottom"
