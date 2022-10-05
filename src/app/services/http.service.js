@@ -36,7 +36,7 @@ http.interceptors.request.use(
       }
     } else {
       if (isExpired) {
-        const { data } = await authService.refresh();
+        const data = await authService.refresh();
         console.log(data, "data after refresh  in access token");
 
         localStorageService.setTokens({

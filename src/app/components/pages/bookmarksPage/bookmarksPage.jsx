@@ -70,9 +70,10 @@ const BookmarksPage = () => {
               cursor: "pointer",
               width: 240,
             }}
-            cover={<img alt="no image" src="/meetlogo.png" />}
+            // cover={<img alt="no image" src="/meetlogo.png" />}
           >
-            <Meta title="no bookmarked episodes" />
+            no bookmarked episodes
+            {/*<Meta title="no bookmarked episodes" />*/}
           </Card>
         )}
       </div>
