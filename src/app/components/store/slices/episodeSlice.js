@@ -8,8 +8,8 @@ const initialState = {
   count: 0,
   amount: 0,
   error: null,
-  bookmarks: localStorageService.fetchAllEpisodes(),
-  bookmarksCount: localStorageService.fetchAllEpisodes().length,
+  bookmarks: localStorageService.fetchAllBookmarkedEpisodes(),
+  bookmarksCount: localStorageService.fetchAllBookmarkedEpisodes().length,
 };
 
 const episodesSlice = createSlice({
@@ -71,6 +71,11 @@ export function fetchEpisodes(page, count) {
     }
   };
 }
+export const getEpisodesBookmarkedStatus = (episodeId) => (state) => {
+  if (state.episodes.bookmarks) {
+    return state.episodes.bookmarks.includes(episodeId);
+  }
+};
 
 export const getEpisodesList = () => (state) => state.episodes.entities;
 export const getEpisodesLoadingStatus = () => (state) => state.episodes.loading;

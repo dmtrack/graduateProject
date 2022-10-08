@@ -9,26 +9,18 @@ import {
 import { getIsLoggedIn } from "../../store/slices/userSlice";
 import EpisodesList from "../../ui/episodesList";
 import { Card, Divider, Image } from "antd";
-import Meta from "antd/es/card/Meta";
 
 const BookmarksPage = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector(getIsLoggedIn());
   const history = useHistory();
   const bookmarkedEpisodes = useSelector(getBookmarkEpisodesList());
   const episodes = useSelector(getEpisodesList());
-  console.log(episodes, "episodes");
-  console.log(bookmarkedEpisodes, "bookmarkedEpisodes");
+  const handleToggleBookmark = (id) => {
+    dispatch(toggleEpisodesBookmarks(id));
+  };
 
   const handleOpenCard = (id) => {
-    history.push(`/${id}`);
-  };
-  const handleToggleBookmark = (id) => {
-    if (isAuth) {
-      dispatch(toggleEpisodesBookmarks(id));
-    } else {
-      history.push("/login");
-    }
+    history.push(`episodes/${id}`);
   };
 
   if (episodes) {
@@ -49,20 +41,11 @@ const BookmarksPage = () => {
         <h2 style={{ marginBottom: "10px" }}>Избранное</h2>
         <Divider />
         {newEpisodes.length > 0 ? (
-          newEpisodes.map((episode) => (
-            <div
-              key={episode._id}
-              className="container-fluid my-3"
-              style={{
-                maxWidth: "350px",
-              }}
-            >
-              <EpisodesList
-                episodes={newEpisodes}
-                onOpenCard={handleOpenCard}
-              />
-            </div>
-          ))
+          <EpisodesList
+            episodes={newEpisodes}
+            onOpenCard={handleOpenCard}
+            onToggleBookmark={handleToggleBookmark}
+          />
         ) : (
           <Card
             hoverable

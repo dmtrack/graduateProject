@@ -41,12 +41,6 @@ const Siderpage = ({ mode }) => {
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
-              label: <Link to="/episodes">Эпизоды</Link>,
-            },
-
-            {
-              key: "3",
               icon: <UserOutlined />,
               label: <Link to="/login">Вход</Link>,
             },

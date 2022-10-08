@@ -41,7 +41,7 @@ export function getUser() {
   return JSON.parse(localStorage.getItem(CURRENT_USER));
 }
 
-export function fetchAllEpisodes() {
+export function fetchAllBookmarkedEpisodes() {
   return JSON.parse(localStorage.getItem(BOOKMARKS)) || [];
 }
 
@@ -62,6 +62,6 @@ const localStorageService = {
   removeAuthData,
   removeBookmarks,
   setEpisodes,
-  fetchAllEpisodes,
+  fetchAllBookmarkedEpisodes,
 };
 export default localStorageService;

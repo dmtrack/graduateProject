@@ -5,6 +5,7 @@ import localStorageService from "../../services/localStorageService";
 
 const Bookmarks = () => {
   const isAuth = localStorageService.getUser();
+
   return (
     <div className="">
       {isAuth ? <BookmarksPage /> : <Redirect to={"/register"} />}

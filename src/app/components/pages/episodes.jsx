@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchEpisodes,
+  getEpisodesBookmarkedStatus,
   getEpisodesList,
   getError,
   toggleEpisodesBookmarks,
@@ -35,12 +36,13 @@ const Episodes = () => {
 
   const handleToggleBookmark = (id) => {
     if (isAuth) {
-      console.log("episodeId = ", id);
       dispatch(toggleEpisodesBookmarks(id));
     } else {
       history.push("/login");
     }
   };
+  // const isSelectedEpisode = (id) => dispatch(getEpisodesBookmarkedStatus(id));
+
   useEffect(() => {
     dispatch(fetchEpisodes(page, ITEMS_PER_PAGE));
   }, []);
