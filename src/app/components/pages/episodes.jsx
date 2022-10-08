@@ -7,9 +7,11 @@ import {
   fetchEpisodes,
   getEpisodesList,
   getError,
+  toggleEpisodesBookmarks,
 } from "../store/slices/episodeSlice";
 import paginate from "../utils/paginate";
 import { Divider, Input, Pagination } from "antd";
+import { getIsLoggedIn } from "../store/slices/userSlice";
 
 const { Search } = Input;
 const ITEMS_PER_PAGE = 4;
@@ -25,9 +27,19 @@ const Episodes = () => {
   const dispatch = useDispatch();
   let episodesCrop = [];
   const [searchQuery, setSearchQuery] = useState("");
+  const isAuth = useDispatch(getIsLoggedIn());
 
   const handleOpenCard = (id) => {
     history.push(`/episodes/${id}`);
+  };
+
+  const handleToggleBookmark = (id) => {
+    if (isAuth) {
+      console.log("episodeId = ", id);
+      dispatch(toggleEpisodesBookmarks(id));
+    } else {
+      history.push("/login");
+    }
   };
   useEffect(() => {
     dispatch(fetchEpisodes(page, ITEMS_PER_PAGE));
@@ -77,6 +89,7 @@ const Episodes = () => {
               <EpisodesList
                 episodes={episodesCrop}
                 onOpenCard={handleOpenCard}
+                onToggleBookmark={handleToggleBookmark}
               />
               <Pagination
                 defaultCurrent={1}

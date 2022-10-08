@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Divider, Row } from "antd";
 import LoginForm2 from "../ui/loginForm2";
 import RegisterFormNew from "../ui/registerForm2";
-import RegisterForm from "../ui/registerForm";
 
 const Login = () => {
   const { type } = useParams();

@@ -6,21 +6,11 @@ import { useDispatch } from "react-redux";
 import { getIsLoggedIn } from "../store/slices/userSlice";
 import { useHistory } from "react-router-dom";
 
-const EpisodesList = ({ episodes, onOpenCard }) => {
-  const dispatch = useDispatch;
-  const isAuth = useDispatch(getIsLoggedIn());
+const EpisodesList = ({ episodes, onOpenCard, onToggleBookmark }) => {
   const history = useHistory();
 
   const handleClick = (id) => {
     onOpenCard(id);
-  };
-  const handleToggleBookmark = (id) => {
-    if (isAuth) {
-      console.log("added to bookmarks");
-      dispatch(toggleEpisodesBookmarks(id));
-    } else {
-      history.push("/login");
-    }
   };
 
   return (
@@ -58,7 +48,7 @@ const EpisodesList = ({ episodes, onOpenCard }) => {
                 <Tooltip title="Добавить в избранное">
                   <Switch
                     size="small"
-                    onClick={() => handleToggleBookmark(item._id)}
+                    onClick={() => onToggleBookmark(item._id)}
                     style={{
                       alignSelf: "center",
                     }}

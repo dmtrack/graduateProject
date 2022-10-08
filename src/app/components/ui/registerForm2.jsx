@@ -20,15 +20,6 @@ const RegisterFormNew = () => {
     comments: null,
   });
   const segments = useSelector(getSegments());
-  // const segmentsList = segments.map((s) => ({
-  //   label: s.name,
-  //   value: s._id,
-  // }));
-  // const segmentsList = segments.map((s) => (
-  //   <Option key={s._id} value={s._id} label="segments">
-  //     {s.name}
-  //   </Option>
-  // ));
 
   const cities = useSelector(getCities());
   const citiesList = cities.map((c) => ({
