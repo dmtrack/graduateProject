@@ -1,32 +1,26 @@
 [
 {
 "_id": "67rdca3eeb7f6fgeed471198",
-"name": "Производство",
-"color": "primary"
+"name": "Производство"
 },
 {
 "_id": "67rdca3eeb7f6fgeed471100",
-"name": "Услуги",
-"color": "secondary"
+"name": "Услуги"
 },
 {
 "_id": "67rdca3eeb7f6fgeed4711012",
-"name": "Продажи",
-"color": "success"
+"name": "Продажи"
 },
 {
 "_id": "67rdca3eeb7f6fgeed471101",
-"name": "Строительство",
-"color": "danger"
+"name": "Строительство"
 },
 {
 "_id": "67rdca3eeb7f6fgeed471102",
-"name": "Проектирование",
-"color": "info"
+"name": "Проектирование"
 },
 {
 "_id": "67rdca3eeb7f6fgeed471103",
-"name": "IT",
-"color": "dark"
+"name": "IT"
 }
 ]

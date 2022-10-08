@@ -1,13 +1,14 @@
 import React from "react";
+import { Divider } from "antd";
 
 const Mainpage = () => {
   return (
     <>
       <div className="container-page">
-          <h2 className="mb-4 text-dark text-muted">О проекте</h2>
-          <hr/>
+        <h2 style={{ marginBottom: "10px" }}>О проекте</h2>
+        <Divider />
 
-          <span className="content">Some text...</span>
+        <span className="content">Some text...</span>
       </div>
     </>
   );

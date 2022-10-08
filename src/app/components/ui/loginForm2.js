@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { validator } from "../utils/validator";
-import TextField from "../common/form/textField";
-import CheckBoxField from "../common/form/checkBoxField";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthError, logIn } from "../store/slices/userSlice";
-
+import { Button, Checkbox, Form, Input } from "antd";
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -20,7 +18,7 @@ const LoginForm = () => {
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
-      [target.name]: target.value,
+      [target.target.name]: target.target.value,
     }));
   };
 
@@ -47,46 +45,75 @@ const LoginForm = () => {
   const isValid = Object.keys(errors).length === 0;
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const isValid = validate();
-    if (!isValid) return;
     const redirect = history.location.state
       ? history.location.state.from.pathname
       : "/";
     dispatch(logIn({ payload: data, redirect }));
   };
   return (
-
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Электронная почта"
-        name="email"
+    <Form
+      name="basic"
+      labelCol={{
+        span: 4,
+      }}
+      wrapperCol={{
+        span: 8,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={handleSubmit}
+      autoComplete="off"
+    >
+      <Form.Item
         value={data.email}
-        onChange={handleChange}
-        error={errors.email}
-      />
-      <TextField
-        label="Пароль"
-        type="password"
-        name="password"
-        value={data.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
-      <CheckBoxField value={data.stayOn} onChange={handleChange} name="stayOn">
-        Оставаться в системе
-      </CheckBoxField>
-      {/*{loginError && <p className="text-danger">{loginError}</p>}*/}
-
-      <button
-        className="btn btn-secondary w-100 mx-auto"
-        type="submit"
-        disabled={!isValid}
+        label="Эл-почта"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: "Введите адрес электронной почты",
+          },
+        ]}
       >
-        Подтвердить
-      </button>
-    </form>
+        <Input name="email" onChange={handleChange} />
+      </Form.Item>
 
+      <Form.Item
+        label="Пароль"
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Введите ваш пароль",
+          },
+        ]}
+      >
+        <Input.Password name="password" onChange={handleChange} />
+      </Form.Item>
+
+      <Form.Item
+        name="remember"
+        valuePropName="checked"
+        wrapperCol={{
+          offset: 4,
+          span: 16,
+        }}
+      >
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
+
+      <Form.Item
+        wrapperCol={{
+          offset: 4,
+          span: 16,
+        }}
+      >
+        <Button type="secondary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

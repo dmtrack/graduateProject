@@ -5,89 +5,116 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchEpisodes,
+  getEpisodesBookmarkedStatus,
   getEpisodesList,
   getError,
+  toggleEpisodesBookmarks,
 } from "../store/slices/episodeSlice";
-import EpisodesFilter from "../ui/EpisodesFilter";
 import paginate from "../utils/paginate";
-import Pagination from "../ui/pagination";
+import { Divider, Input, Pagination } from "antd";
+import { getIsLoggedIn } from "../store/slices/userSlice";
 
-const ITEMS_PER_PAGE = 2;
+const { Search } = Input;
+const ITEMS_PER_PAGE = 4;
 
 const Episodes = () => {
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(ITEMS_PER_PAGE);
   const episodes = useSelector(getEpisodesList());
   const error = useSelector(getError());
   const history = useHistory();
   const params = useParams();
-  const {episodeId} = params;
+  const { episodeId } = params;
   const dispatch = useDispatch();
-  let episodesCrop = []
+  let episodesCrop = [];
   const [searchQuery, setSearchQuery] = useState("");
-
+  const isAuth = useDispatch(getIsLoggedIn());
 
   const handleOpenCard = (id) => {
     history.push(`/episodes/${id}`);
   };
+
+  const handleToggleBookmark = (id) => {
+    if (isAuth) {
+      dispatch(toggleEpisodesBookmarks(id));
+    } else {
+      history.push("/login");
+    }
+  };
+  // const isSelectedEpisode = (id) => dispatch(getEpisodesBookmarkedStatus(id));
+
   useEffect(() => {
     dispatch(fetchEpisodes(page, ITEMS_PER_PAGE));
   }, []);
 
-  function pageChangeHandler(pageIndex) {
-    setPage(pageIndex);
+  function pageChangeHandler(page, pageSize) {
+    setPage(page);
+    setPageSize(pageSize);
   }
 
-  const handleSearchQuery = ({target}) => {
+  const handleSearchQuery = ({ target }) => {
     setSearchQuery(target.value);
   };
 
   if (episodes) {
     function filterEpisodes(data) {
       const filteredEpisodes = searchQuery
-          ? data.filter(
-              (episode) =>
-                  episode.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 || episode.brief.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 || episode.timecodes.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
-          ) : data;
-      return filteredEpisodes
+        ? data.filter(
+            (episode) =>
+              episode.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              episode.brief.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              episode.timecodes
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+          )
+        : data;
+      return filteredEpisodes;
     }
-    const filteredEpisodes = filterEpisodes(episodes)
-    const episodesCount = filteredEpisodes.length
+    const filteredEpisodes = filterEpisodes(episodes);
     episodesCrop = paginate(filteredEpisodes, page, ITEMS_PER_PAGE);
     return (
-        <>
+      <>
         <div className="container-page mx-auto  ">
-          {episodesCount > 0 && episodeId === undefined && (
-              <div className="d-flex justify-content-center mx-auto max-width: 800px flex-column">
-                <h2 className='text-dark text-muted'>Эпизоды</h2>
-                <hr/>
-                <div className="container-search">
-                  <input
-                      type="text"
-                      name="searchQuery"
-                      className="input-search"
-                      placeholder="Поиск.."
-                      onChange={handleSearchQuery}
-                      value={searchQuery}
-                  />
-                </div>
-                <EpisodesList episodes={episodesCrop} onOpenCard={handleOpenCard} />
-                <Pagination
-                    itemsCount={episodesCount}
-                    pageSize={ITEMS_PER_PAGE}
-                    currentPage={page}
-                    onPageChange={pageChangeHandler}
+          {episodes && episodeId === undefined && (
+            <div className="d-flex justify-content-center mx-auto max-width: 800px flex-column">
+              <h2 className="text-dark text-muted">Эпизоды</h2>
+              <Divider />
+              <div className="container-search">
+                <Search
+                  placeholder="Поиск..."
+                  allowClear
+                  onChange={handleSearchQuery}
+                  value={searchQuery}
+                  style={{ marginBottom: 10 }}
                 />
-              </div>)}
+              </div>
+              <EpisodesList
+                episodes={episodesCrop}
+                onOpenCard={handleOpenCard}
+                onToggleBookmark={handleToggleBookmark}
+              />
+              <Pagination
+                defaultCurrent={1}
+                onChange={(page, pageSize) => pageChangeHandler(page, pageSize)}
+                current={page}
+                defaultPageSize={pageSize}
+                total={filteredEpisodes.length}
+                size={"small"}
+                hideOnSinglePage={true}
+              />
+            </div>
+          )}
 
           {episodeId !== undefined && (
             <div className="container pt-5 mx-auto">
-            <Episode id={episodeId} episodes={episodes} />
+              <Episode id={episodeId} episodes={episodes} />
             </div>
-            )}
-          </div>
-        </>
           )}
+        </div>
+      </>
+    );
+  }
   return "loading...";
-}
+};
 
 export default Episodes;

@@ -90,7 +90,6 @@ const createUserFailed = createAction("users/userCreateFailed");
 
 export const logIn =
   ({ payload, redirect }) =>
-
   async (dispatch) => {
     const { email, password } = payload;
     dispatch(authRequested());
@@ -110,19 +109,19 @@ export const logIn =
     }
   };
 
-export const signUp =
-  (payload) =>
-  async (dispatch) => {
-    dispatch(authRequested());
-    try {
-      const data = await authService.register(payload);
-      localStorageService.setTokens(data);
-      dispatch(authRequestSuccess({ userId: data.userId }));
-    } catch (error) {
-      dispatch(authRequestFailed(error.message));
-    }
-    history.push('/episodes')
-  };
+export const signUp = (payload) => async (dispatch) => {
+  dispatch(authRequested());
+  try {
+    console.log("payload");
+    const data = await authService.register(payload);
+    console.log(data, "data-auth");
+    localStorageService.setTokens(data);
+    dispatch(authRequestSuccess({ userId: data.userId }));
+  } catch (error) {
+    dispatch(authRequestFailed(error.message));
+  }
+  history.push("/episodes");
+};
 
 export const logOut = () => (dispatch) => {
   localStorageService.removeAuthData();
