@@ -52,8 +52,8 @@ const {
   episodesToggleBookmarked,
 } = actions;
 
-export const toggleEpisodesBookmarks = (userId) => (dispatch) => {
-  dispatch(episodesToggleBookmarked(userId));
+export const toggleEpisodesBookmarks = (episodeId) => (dispatch) => {
+  dispatch(episodesToggleBookmarked(episodeId));
 };
 
 export const getBookmarkEpisodesList = () => (state) =>

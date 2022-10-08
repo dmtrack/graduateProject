@@ -18,6 +18,7 @@ const BookmarksPage = () => {
   const bookmarkedEpisodes = useSelector(getBookmarkEpisodesList());
   const episodes = useSelector(getEpisodesList());
   console.log(episodes, "episodes");
+  console.log(bookmarkedEpisodes, "bookmarkedEpisodes");
 
   const handleOpenCard = (id) => {
     history.push(`/${id}`);
