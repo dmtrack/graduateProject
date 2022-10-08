@@ -112,9 +112,9 @@ const Episodes = () => {
         )}
 
         {episodeId !== undefined && (
-          <Row>
+          <div>
             <Episode id={episodeId} episodes={episodes} />
-          </Row>
+          </div>
         )}
       </>
     );
