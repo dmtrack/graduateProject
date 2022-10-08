@@ -26,7 +26,7 @@ function App() {
     <>
       <AppLoader>
         <Layout>
-          <Siderpage mode={collapsed} />
+          <Siderpage mode={!collapsed} />
           <Layout className="site-layout">
             <Headerpage
               collapsed={collapsed}

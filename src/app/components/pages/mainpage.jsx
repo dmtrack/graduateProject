@@ -1,15 +1,22 @@
 import React from "react";
-import { Divider } from "antd";
+import { Col, Divider, Row } from "antd";
+import { Typography } from "antd";
+const { Title, Text } = Typography;
 
 const Mainpage = () => {
   return (
     <>
-      <div className="container-page">
-        <h2 style={{ marginBottom: "10px" }}>О проекте</h2>
-        <Divider />
-
-        <span className="content">Some text...</span>
-      </div>
+      <Row>
+        <Col span={1}></Col>
+        <Col span={21}>
+          <Title level={3}>О проекте</Title>
+          <Divider />
+          <Row>
+            <Text>Some text...(default)</Text>
+          </Row>
+        </Col>
+        <Col span={1}></Col>
+      </Row>
     </>
   );
 };

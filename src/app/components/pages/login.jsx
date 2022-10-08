@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Divider, Row } from "antd";
+import { Divider, Row, Col } from "antd";
 import LoginForm2 from "../ui/loginForm2";
 import RegisterFormNew from "../ui/registerForm2";
+import { Typography } from "antd";
+const { Title, Text } = Typography;
 
 const Login = () => {
   const { type } = useParams();
@@ -16,45 +18,42 @@ const Login = () => {
   };
 
   return (
-    <div className="container-page">
-      <div className="row">
-        <div className="col-md-7 offset-md-1 ">
-          {formType === "register" ? (
-            <>
-              <h2 className="mb-4 text-dark text-muted">Регистрация</h2>
-              <Divider />
-              <RegisterFormNew />
-              <p>
-                У вас есть аккаунт?{" "}
-                <a role="button" onClick={toggleFormType}>
-                  {" "}
-                  Вход
-                </a>
-              </p>
-            </>
-          ) : (
-            <>
-              <h2
-                className="mb-4 text-dark text-muted "
-                style={{ marginRight: 5 }}
-              >
+    <>
+      {formType === "register" ? (
+        <Row>
+          <Col span={20}>
+            <Title level={3}>Регистрация</Title>
+            <Divider />
+            <RegisterFormNew />
+            <p style={{ marginLeft: "10px" }}>
+              У вас есть аккаунт?
+              <a role="button" onClick={toggleFormType}>
+                {" "}
                 Вход
-              </h2>
-              <Divider />
+              </a>
+            </p>
+          </Col>
+          <Col span={1}></Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col span={20}>
+            <Title level={3}>Вход</Title>
+            <Divider />
 
-              <LoginForm2 />
-              <p>
-                Нет аккаунта?{" "}
-                <a role="button" onClick={toggleFormType}>
-                  {" "}
-                  Регистрация
-                </a>
-              </p>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+            <LoginForm2 />
+            <p style={{ marginLeft: "10px" }}>
+              Нет аккаунта?{" "}
+              <a role="button" onClick={toggleFormType}>
+                {" "}
+                Регистрация
+              </a>
+            </p>
+          </Col>
+          <Col span={1}></Col>
+        </Row>
+      )}
+    </>
   );
 };
 
