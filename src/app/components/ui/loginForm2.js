@@ -57,13 +57,13 @@ const LoginForm = () => {
         span: 4,
       }}
       wrapperCol={{
-        span: 8,
+        span: 12,
       }}
       initialValues={{
         remember: true,
       }}
       onFinish={handleSubmit}
-      autoComplete="off"
+      autoComplete="on"
     >
       <Form.Item
         value={data.email}
@@ -99,9 +99,7 @@ const LoginForm = () => {
           offset: 4,
           span: 16,
         }}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+      ></Form.Item>
 
       <Form.Item
         wrapperCol={{

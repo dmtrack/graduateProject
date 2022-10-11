@@ -120,10 +120,10 @@ const RegisterFormNew = () => {
     <Form
       name="basic"
       labelCol={{
-        span: 4,
+        span: 6,
       }}
       wrapperCol={{
-        span: 8,
+        span: 12,
       }}
       initialValues={{
         remember: true,
@@ -191,8 +191,8 @@ const RegisterFormNew = () => {
       </Form.Item>
       <Form.Item
         wrapperCol={{
-          offset: 2,
-          span: 8,
+          offset: 0,
+          span: 12,
         }}
         label={"Ваш пол"}
         required={true}
@@ -205,7 +205,7 @@ const RegisterFormNew = () => {
 
       <Form.Item
         wrapperCol={{
-          span: 8,
+          span: 12,
         }}
         label={"Ваш сегмент"}
         required={true}
@@ -228,8 +228,8 @@ const RegisterFormNew = () => {
 
       <Form.Item
         wrapperCol={{
-          offset: 4,
-          span: 8,
+          offset: 6,
+          span: 12,
         }}
       >
         <Button type="secondary" htmlType="submit">

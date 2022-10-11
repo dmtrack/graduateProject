@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EpisodesList from "../ui/episodesList";
-import Episode from "./episode";
+import Episode from "../ui/episode";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,8 +11,10 @@ import {
   toggleEpisodesBookmarks,
 } from "../store/slices/episodeSlice";
 import paginate from "../utils/paginate";
-import { Divider, Input, Pagination } from "antd";
+import { Col, Divider, Input, Pagination, Row } from "antd";
 import { getIsLoggedIn } from "../store/slices/userSlice";
+import { Typography } from "antd";
+const { Title, Text } = Typography;
 
 const { Search } = Input;
 const ITEMS_PER_PAGE = 4;
@@ -74,10 +76,12 @@ const Episodes = () => {
     episodesCrop = paginate(filteredEpisodes, page, ITEMS_PER_PAGE);
     return (
       <>
-        <div className="container-page mx-auto  ">
-          {episodes && episodeId === undefined && (
-            <div className="d-flex justify-content-center mx-auto max-width: 800px flex-column">
-              <h2 className="text-dark text-muted">Эпизоды</h2>
+        {episodes && episodeId === undefined && (
+          <Row>
+            <Col span={1}></Col>
+            <Col span={21}>
+              <Title level={3}>Эпизоды</Title>
+
               <Divider />
               <div className="container-search">
                 <Search
@@ -102,15 +106,16 @@ const Episodes = () => {
                 size={"small"}
                 hideOnSinglePage={true}
               />
-            </div>
-          )}
+            </Col>
+            <Col span={1}></Col>
+          </Row>
+        )}
 
-          {episodeId !== undefined && (
-            <div className="container pt-5 mx-auto">
-              <Episode id={episodeId} episodes={episodes} />
-            </div>
-          )}
-        </div>
+        {episodeId !== undefined && (
+          <div>
+            <Episode id={episodeId} episodes={episodes} />
+          </div>
+        )}
       </>
     );
   }

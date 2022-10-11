@@ -38,7 +38,13 @@ function NavProfile() {
           }}
         >
           <Avatar
-            src={<Image src={currentUser.image} style={{ width: 40 }} />}
+            src={
+              <Image
+                preview={false}
+                src={currentUser.image}
+                style={{ width: 40 }}
+              />
+            }
           />
         </Dropdown>
       </div>
