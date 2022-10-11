@@ -44,9 +44,11 @@ const Episode = ({ id, episodes }) => {
               marginBottom: "20px",
             }}
           >
-            <Col span={2}>>>></Col>
+            <Col span={1} style={{ marginRight: "5px" }}>
+              >>>
+            </Col>
 
-            <Col span={2} style={{ marginLeft: "5px" }}>
+            <Col span={1} style={{ marginLeft: "5px" }}>
               <a href={episode.youtubeURL}>
                 <Image
                   src={youTubeLogo}
@@ -55,7 +57,7 @@ const Episode = ({ id, episodes }) => {
                 />
               </a>
             </Col>
-            <Col span={2} style={{ marginLeft: "5px" }}>
+            <Col span={1} style={{ marginLeft: "10px" }}>
               <a href={episode.vkURL}>
                 <Image
                   src={vkLogo}
